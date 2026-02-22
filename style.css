@@ -84,6 +84,7 @@ h1 {
     letter-spacing: 3px;
 }
 
+<<<<<<< HEAD
 /* Intro Video Screen */
 .intro-screen {
     position: relative;
@@ -131,6 +132,8 @@ h1 {
     box-shadow: 0 2px 0 var(--button-shadow);
 }
 
+=======
+>>>>>>> 939246c0263ec877bcbeb47828f45804afcbe9a5
 /* Parchment background for all screens */
 .parchment {
     background: rgba(245, 222, 179, 0.15);
@@ -365,4 +368,8 @@ button:active { transform: translateY(4px); box-shadow: 0 2px 0 var(--button-sha
     0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
     80% { transform: translate(-50%, -50%) scale(1.1); }
     100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 939246c0263ec877bcbeb47828f45804afcbe9a5

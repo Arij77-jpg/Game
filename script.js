@@ -16,6 +16,7 @@ const LEVEL_OBSTACLES = [0, 2, 4, 6, 8, 10, 12, 14, 16];
 const LEVEL_BOMBS = [0, 0, 0, 2, 3, 4, 5, 6, 7];
 const LEVEL_TIME = [0, 60, 55, 50, 45, 40, 35, 30, 25];
 
+<<<<<<< HEAD
 const CELL_OBSTACLE = -1;
 const CELL_BOMB = -2;
 
@@ -42,6 +43,11 @@ window.addEventListener('load', function() {
     // Attempt to play (autoplay is set, but browsers may block)
     video.play().catch(e => console.log("Autoplay prevented, user must click skip or wait"));
 });
+=======
+const CELL_GOLDEN = 1;
+const CELL_OBSTACLE = -1;
+const CELL_BOMB = -2;
+>>>>>>> 939246c0263ec877bcbeb47828f45804afcbe9a5
 
 // ---------- GLOBAL ----------
 let currentHouse = 'Gryffindor';
@@ -166,11 +172,16 @@ function drawDobby(ctx, isHappy) {
     ctx.shadowBlur = 0;
 }
 
+<<<<<<< HEAD
 // ---------- SOUND EFFECTS ----------
+=======
+// ---------- SOUND EFFECTS (with bomb explosion) ----------
+>>>>>>> 939246c0263ec877bcbeb47828f45804afcbe9a5
 function playSound(type) {
     try {
         if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         
+<<<<<<< HEAD
         const gain = audioCtx.createGain();
         gain.gain.value = 0.5;
         gain.connect(audioCtx.destination);
@@ -179,6 +190,15 @@ function playSound(type) {
             const osc = audioCtx.createOscillator();
             osc.connect(gain);
             osc.frequency.value = 880;
+=======
+        if (type === 'collect') {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.frequency.value = 880;
+            gain.gain.value = 0.2;
+>>>>>>> 939246c0263ec877bcbeb47828f45804afcbe9a5
             osc.start();
             osc.stop(audioCtx.currentTime + 0.1);
         } 
@@ -186,16 +206,32 @@ function playSound(type) {
             const notes = [523.25, 659.25, 783.99];
             notes.forEach((freq, i) => {
                 const osc = audioCtx.createOscillator();
+<<<<<<< HEAD
                 osc.connect(gain);
                 osc.frequency.value = freq;
+=======
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.frequency.value = freq;
+                gain.gain.value = 0.15;
+>>>>>>> 939246c0263ec877bcbeb47828f45804afcbe9a5
                 osc.start(audioCtx.currentTime + i * 0.15);
                 osc.stop(audioCtx.currentTime + i * 0.15 + 0.3);
             });
         } 
         else if (type === 'move') {
             const osc = audioCtx.createOscillator();
+<<<<<<< HEAD
             osc.connect(gain);
             osc.frequency.value = 600;
+=======
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.frequency.value = 600;
+            gain.gain.value = 0.05;
+>>>>>>> 939246c0263ec877bcbeb47828f45804afcbe9a5
             osc.start();
             osc.stop(audioCtx.currentTime + 0.03);
         } 
@@ -203,13 +239,22 @@ function playSound(type) {
             const notes = [392, 349.23, 329.63, 293.66];
             notes.forEach((freq, i) => {
                 const osc = audioCtx.createOscillator();
+<<<<<<< HEAD
                 osc.connect(gain);
                 osc.frequency.value = freq;
+=======
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.frequency.value = freq;
+                gain.gain.value = 0.2;
+>>>>>>> 939246c0263ec877bcbeb47828f45804afcbe9a5
                 osc.start(audioCtx.currentTime + i * 0.2);
                 osc.stop(audioCtx.currentTime + i * 0.2 + 0.3);
             });
         }
         else if (type === 'bomb') {
+<<<<<<< HEAD
             const osc = audioCtx.createOscillator();
             osc.connect(gain);
             osc.frequency.value = 100;
@@ -218,6 +263,24 @@ function playSound(type) {
             const osc2 = audioCtx.createOscillator();
             osc2.connect(gain);
             osc2.frequency.value = 50;
+=======
+            // Explosion sound
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.frequency.value = 100;
+            gain.gain.value = 0.5;
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.3);
+            // Second low frequency for rumble
+            const osc2 = audioCtx.createOscillator();
+            const gain2 = audioCtx.createGain();
+            osc2.connect(gain2);
+            gain2.connect(audioCtx.destination);
+            osc2.frequency.value = 50;
+            gain2.gain.value = 0.3;
+>>>>>>> 939246c0263ec877bcbeb47828f45804afcbe9a5
             osc2.start(audioCtx.currentTime + 0.1);
             osc2.stop(audioCtx.currentTime + 0.4);
         }
@@ -471,7 +534,11 @@ function gameOver(reason) {
         playSound('gameover');
     } else if (reason === 'bomb') {
         reasonText = `💣 BOOM! You stepped on a bomb on Level ${currentLevel}!`;
+<<<<<<< HEAD
         playSound('bomb');
+=======
+        playSound('bomb'); // Bomb sound!
+>>>>>>> 939246c0263ec877bcbeb47828f45804afcbe9a5
     } else {
         reasonText = `❌ Wrong move! You got stuck on Level ${currentLevel} (no moves left).`;
         playSound('gameover');
@@ -540,6 +607,10 @@ function tryMove(dr, dc) {
         playerPos = { r: nr, c: nc };
         
         if (cell === CELL_BOMB) {
+<<<<<<< HEAD
+=======
+            // Bomb! Game over with sound
+>>>>>>> 939246c0263ec877bcbeb47828f45804afcbe9a5
             gameOver('bomb');
             return;
         }
