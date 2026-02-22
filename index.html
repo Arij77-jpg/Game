@@ -2,35 +2,52 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Harry's Golden Ball Quest - ⚡ House Themes</title>
+    <title>The Snitch's Path</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="app-container" class="theme-gryffindor"> <!-- Default theme -->
+    <div id="app-container" class="theme-gryffindor">
+        <!-- Floating Snitch Animation -->
+        <div class="floating-snitch">✨</div>
+        
         <div class="game-container">
-            <div class="floating-candle" style="left:20px; animation-delay:0s;"></div>
-            <div class="floating-candle" style="left:70px; animation-delay:0.5s;"></div>
-            <div class="floating-candle" style="right:20px; left:auto; animation-delay:1s;"></div>
-            <h1>⚡ HARRY'S GRID QUEST ⚡</h1>
-            <div style="position:absolute; top:10px; right:20px; color:#D4AF37;">✨ House Themes ✨</div>
+            <!-- INTRO VIDEO SCREEN -->
+            <div id="introScreen" class="intro-screen">
+                <video id="introVideo" autoplay muted playsinline>
+                    <source src="intro.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <button id="skipIntroBtn" class="skip-btn">Skip Intro</button>
+            </div>
 
+            <h1 id="mainTitle" style="display:none;">⚡ THE SNITCH'S PATH ⚡</h1>
+            
             <!-- HOME SCREEN -->
-            <div id="homeScreen">
+            <div id="homeScreen" class="parchment" style="display:none;">
                 <div class="selection-section">
                     <div class="section-title">🏰 Choose Your House</div>
-                    <button class="house-btn" style="background:#740001;" data-house="Gryffindor">🦁 Gryffindor</button>
-                    <button class="house-btn" style="background:#1A472A;" data-house="Slytherin">🐍 Slytherin</button>
-                    <button class="house-btn" style="background:#0E2150;" data-house="Ravenclaw">🦅 Ravenclaw</button>
-                    <button class="house-btn" style="background:#ECB939; color:black;" data-house="Hufflepuff">🦡 Hufflepuff</button>
+                    <div class="house-buttons">
+                        <button class="house-btn" style="background:#740001;" data-house="Gryffindor">Gryffindor</button>
+                        <button class="house-btn" style="background:#1A472A;" data-house="Slytherin">Slytherin</button>
+                        <button class="house-btn" style="background:#0E2150;" data-house="Ravenclaw">Ravenclaw</button>
+                        <button class="house-btn" style="background:#ECB939; color:black;" data-house="Hufflepuff">Hufflepuff</button>
+                    </div>
                 </div>
+                
                 <div class="selection-section">
                     <div class="section-title">🧙 Choose Your Character</div>
-                    <button class="char-btn" style="background:#4a6fa5;" data-char="harry">👓 Harry</button>
-                    <button class="char-btn" style="background:#b5651e;" data-char="hermione">📚 Hermione</button>
-                    <button class="char-btn" style="background:#8b4513;" data-char="ron">♟️ Ron</button>
+                    <div class="character-buttons">
+                        <button class="char-btn" style="background:#4a6fa5;" data-char="harry">👓 Harry</button>
+                        <button class="char-btn" style="background:#b5651e;" data-char="hermione">📚 Hermione</button>
+                        <button class="char-btn" style="background:#8b4513;" data-char="ron">♟️ Ron</button>
+                    </div>
                 </div>
+                
                 <button id="startBtn">🚀 START QUEST</button>
-                <button onclick="showRankings()" style="margin-top:10px;">🏆 House Rankings</button>
+                <button onclick="showRankings()" class="secondary-btn">🏆 House Rankings</button>
+                
+                <div class="magical-quote">"It does not do to dwell on dreams and forget to play."</div>
             </div>
 
             <!-- GAME SCREEN -->
@@ -53,7 +70,7 @@
             </div>
 
             <!-- RANKINGS SCREEN -->
-            <div id="rankingsScreen" style="display:none;">
+            <div id="rankingsScreen" style="display:none;" class="parchment">
                 <h2>🏆 House Rankings</h2>
                 <div id="rankList"></div>
                 <button onclick="backToHome()">⬅ Back</button>
@@ -61,7 +78,7 @@
             </div>
 
             <!-- RESULT SCREEN -->
-            <div id="resultScreen" style="display:none;">
+            <div id="resultScreen" style="display:none;" class="parchment">
                 <h2>✨ Quest Complete ✨</h2>
                 <div class="result-box">
                     <p>Your Total Score: <span id="resultPlayerScore"></span></p>
@@ -72,7 +89,7 @@
             </div>
 
             <!-- LEVEL COMPLETE SCREEN -->
-            <div id="levelCompleteScreen" style="display:none;">
+            <div id="levelCompleteScreen" style="display:none;" class="parchment">
                 <h2>🎉 Level Complete! 🎉</h2>
                 <div class="level-box">
                     <p>Level <span id="completedLevel"></span> finished!</p>
@@ -84,7 +101,7 @@
             </div>
 
             <!-- GAME OVER SCREEN -->
-            <div id="gameOverScreen" style="display:none;">
+            <div id="gameOverScreen" style="display:none;" class="parchment">
                 <h2>💀 GAME OVER 💀</h2>
                 <div class="gameover-box">
                     <p id="gameOverReason"></p>
@@ -97,9 +114,15 @@
         </div>
     </div>
 
+    <!-- DOBBY POPUP -->
+    <div id="dobbyPopup" class="dobby-popup" style="display:none;">
+        <canvas id="dobbyCanvas" width="200" height="200"></canvas>
+        <div id="dobbyMessage"></div>
+    </div>
+
     <!-- TUTORIAL MODAL -->
     <div id="tutorial" style="display: none;">
-        <div class="tutorial-box">
+        <div class="tutorial-box parchment">
             <h2>🧙 Welcome, Young Wizard!</h2>
             <p>✨ Collect golden balls by moving → or ↓.<br>💀 Avoid black Bludgers.<br>🌟 Light blue cells show the optimal path.<br>⏱️ You have limited time per level – hurry!<br>🧱 If you get stuck with no moves, game over!</p>
             <button onclick="closeTutorial()">Let's Go!</button>
